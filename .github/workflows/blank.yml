@@ -23,16 +23,16 @@ jobs:
          user-name: ${{ env.POWER_USER }}
          password-secret: ${{ env.POWER_PWD }}
          solution-name: ${{ env.SOLUTION_NAME }}
-         solution-output-file: ${{ env.$EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
+         solution-output-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
          
       - name: unpack-solution action
         uses: microsoft/powerplatform-actions/unpack-solution@v0
         with:
-         solution-file: ${{ env.$EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
-         solution-folder: ${{ env.$EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}
+         solution-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
+         solution-folder: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}
          solution-type: 'unmanaged'
          overwrite-files: true
          
       - name: Synchronize Files
         run: |
-          cmd /k ${{ env.$EXPORT_FOLDER }}/sync_repo_with_export.bat ./${{ env.SOLUTION_NAME }} ../../.
+          cmd /k ${{ env.EXPORT_FOLDER }}/sync_repo_with_export.bat ./${{ env.SOLUTION_NAME }} ../../.
