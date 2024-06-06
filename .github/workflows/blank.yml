@@ -20,16 +20,16 @@ jobs:
         uses: microsoft/powerplatform-actions/export-solution@v0
         with:
          environment-url: ${{ env.POWER_APPS }}
-         user-name: $POWER_USER
-         password-secret: $POWER_PWD
-         solution-name: $SOLUTION_NAME
-         solution-output-file: $EXPORT_FOLDER/$SOLUTION_NAME.zip
+         user-name: ${{ env.POWER_USER }}
+         password-secret: ${{ env.POWER_PWD }}
+         solution-name: ${{ env.SOLUTION_NAME }}
+         solution-output-file: ${{ env.$EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
          
       - name: unpack-solution action
         uses: microsoft/powerplatform-actions/unpack-solution@v0
         with:
-         solution-file: $EXPORT_FOLDER/$SOLUTION_NAME.zip
-         solution-folder: $EXPORT_FOLDER/$SOLUTION_NAME
+         solution-file: ${{ env.$EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
+         solution-folder: ${{ env.$EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}
          solution-type: 'unmanaged'
          overwrite-files: true
          
@@ -37,4 +37,4 @@ jobs:
         run: |
           cd $EXPORT_FOLDER
           dir
-          cmd /k $EXPORT_FOLDER/sync_repo_with_export.bat ./$SOLUTION_NAME ../../.
+          cmd /k ${{ env.$EXPORT_FOLDER }}/sync_repo_with_export.bat ./${{ env.SOLUTION_NAME }} ../../.
