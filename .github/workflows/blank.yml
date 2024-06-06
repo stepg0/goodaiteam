@@ -19,7 +19,7 @@ jobs:
       - name: export-solution action
         uses: microsoft/powerplatform-actions/export-solution@v0
         with:
-         environment-url: ${{POWER_APPS}}
+         environment-url: ${POWER_APPS}
          user-name: $POWER_USER
          password-secret: $POWER_PWD
          solution-name: $SOLUTION_NAME
