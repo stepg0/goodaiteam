@@ -12,6 +12,5 @@ jobs:
       - name: Run a multi-line script
         run: |
           cmd .github/workflows/sync_repo_with_export.bat
-          dir
-          cd..
+          cd .github/workflows
           dir
