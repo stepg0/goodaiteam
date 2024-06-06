@@ -37,4 +37,4 @@ jobs:
         run: |
           cd $EXPORT_FOLDER
           dir
-          cmd /k $EXPORT_FOLDER/sync_repo_with_export.bat
+          cmd /k $EXPORT_FOLDER/sync_repo_with_export.bat ./$SOLUTION_NAME ../../.
