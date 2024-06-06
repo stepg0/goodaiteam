@@ -18,6 +18,7 @@ jobs:
 
       - name: Synchronize Files
         run: |
-          echo ${{ env.GITHUB_WORKSPACE }}
-          cd ${{ env.EXPORT_FOLDER }}
+          dir
+          cd ${{ env.GITHUB_WORKSPACE }}/${{ env.EXPORT_FOLDER }}
+          dir
           cmd /k sync_repo_with_export.bat ./${{ env.SOLUTION_NAME }} ../../.
