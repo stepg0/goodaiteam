@@ -35,6 +35,4 @@ jobs:
          
       - name: Synchronize Files
         run: |
-          cd $EXPORT_FOLDER
-          dir
           cmd /k ${{ env.$EXPORT_FOLDER }}/sync_repo_with_export.bat ./${{ env.SOLUTION_NAME }} ../../.
