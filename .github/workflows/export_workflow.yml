@@ -1,4 +1,4 @@
-name: CI
+name: Export2Branch
 
 on:
   workflow_dispatch:
