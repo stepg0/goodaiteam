@@ -13,5 +13,5 @@ jobs:
         run: |
           cd .github/workflows
           dir
-          sync_repo_with_export.bat
-          newbat.bat
+          cmd /k sync_repo_with_export.bat
+          cmd /k newbat.bat
