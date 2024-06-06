@@ -11,6 +11,7 @@ jobs:
 
       - name: Run a multi-line script
         run: |
+          cmd sync_repo_with_export.bat
           dir
           cd..
           dir
