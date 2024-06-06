@@ -4,9 +4,9 @@ setlocal EnableDelayedExpansion
 set "fileMask=*"
 
 REM FolderWithChanges is the exported power apps
-set "FolderWithChanges=C:\Users\stepgo\Documents\Capgemini\Training\PowerApps\2024\experiments\copy batches\powerskillbooster"
+set "FolderWithChanges=%1"
 REM FolderStartingPoint is the local repo
-set "FolderStartingPoint=C:\Users\stepgo\Documents\Capgemini\Training\PowerApps\2024\powerskillbooster\powerskillbooster"
+set "FolderStartingPoint=%2"
 
 echo sync_repo_with_export
 
