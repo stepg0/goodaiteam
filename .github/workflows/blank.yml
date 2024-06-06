@@ -1,0 +1,16 @@
+name: CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  commit-from-power-apps:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run a multi-line script
+        run: |
+          dir
+          cd..
+          dir
