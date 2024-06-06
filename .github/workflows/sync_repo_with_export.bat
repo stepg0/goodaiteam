@@ -8,6 +8,7 @@ set "FolderWithChanges=C:\Users\stepgo\Documents\Capgemini\Training\PowerApps\20
 REM FolderStartingPoint is the local repo
 set "FolderStartingPoint=C:\Users\stepgo\Documents\Capgemini\Training\PowerApps\2024\powerskillbooster\powerskillbooster"
 
+echo sync_repo_with_export
 
 REM fc https://learn.microsoft.com/de-de/windows-server/administration/windows-commands/fc result of fc -> ERRORLEVEL
 REM errorlevel: 0  / No differences encountered -> do not overwrite
@@ -18,7 +19,7 @@ REM errorlevel: -1 / Invalid syntax
 REM ----------- START DELETE from REPO --------------
 REM list all folders in FolderStartingPoint recursively
 for /f "delims=" %%D in ('echo "."^&forfiles /s /p "%FolderStartingPoint%" /m "%fileMask%" /c "cmd /c if @isdir==TRUE echo @relpath"') do (
-	REM debug echo directory "%%D"
+	echo directory "%%D"
 	
 	for /f "delims=" %%F in ('dir /b "%FolderStartingPoint%\%%D"') do (
 		REM ignore folders
