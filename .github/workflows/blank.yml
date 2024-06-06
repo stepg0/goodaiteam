@@ -2,16 +2,39 @@ name: CI
 
 on:
   workflow_dispatch:
-
+  
+env:
+  POWER_APPS: 'https://orga09cbdeb.crm16.dynamics.com'
+  POWER_USER: 'SkillboosterCCAPart13@mscloudguild.onmicrosoft.com' #EACH USER
+  POWER_PWD: 'Fuy71602' #EACH USER
+  SOLUTION_NAME: Technical
+  EXPORT_FOLDER: .github/workflows
+  
 jobs:
   commit-from-power-apps:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
 
-      - name: Run a multi-line script
+      - name: export-solution action
+        uses: microsoft/powerplatform-actions/export-solution@v0
+        with:
+         environment-url: $POWER_APPS
+         user-name: $POWER_USER
+         password-secret: $POWER_PWD
+         solution-name: $SOLUTION_NAME
+         solution-output-file: $EXPORT_FOLDER/$SOLUTION_NAME.zip
+         
+      - name: unpack-solution action
+        uses: microsoft/powerplatform-actions/unpack-solution@v0
+        with:
+         solution-file: $EXPORT_FOLDER/$SOLUTION_NAME.zip
+         solution-folder: $EXPORT_FOLDER/$SOLUTION_NAME
+         solution-type: 'unmanaged'
+         overwrite-files: true
+         
+      - name: Synchronize Files
         run: |
-          cd .github/workflows
+          cd $EXPORT_FOLDER
           dir
-          cmd /k sync_repo_with_export.bat
-          cmd /k newbat.bat
+          cmd /k $EXPORT_FOLDER/sync_repo_with_export.bat
