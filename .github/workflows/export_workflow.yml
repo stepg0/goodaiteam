@@ -9,13 +9,19 @@ env:
   POWER_PWD: 'Fuy71602' #EACH USER
   SOLUTION_NAME: Technical
   EXPORT_FOLDER: .github/workflows
+  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
   
 jobs:
   commit-from-power-apps:
     runs-on: windows-latest
     steps:
+      - name: Configure Git
+        run: |
+          git config --global user.name ${{ github.actor }}
+          git config --global user.email "step-go@hotmail.com"
+          
       - uses: actions/checkout@v4
-
+    
       - name: export-solution action
         uses: microsoft/powerplatform-actions/export-solution@v0
         with:
@@ -37,3 +43,9 @@ jobs:
         run: |
           cd ${{ env.EXPORT_FOLDER }}
           cmd /k sync_repo_with_export.bat ${{ GITHUB.WORKSPACE }}/${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }} ${{ GITHUB.WORKSPACE }}
+
+      - name: Commit changes
+        run: |
+          git add *
+          git commit -m "Synchronized with ${{ env.POWER_USER }} from ${{ env.SOLUTION_NAME }} in Power Apps"
+          git push
