@@ -30,6 +30,8 @@ jobs:
           git add my_file.txt
           git commit -m "Add my_file.txt"
           git push
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
 
 
