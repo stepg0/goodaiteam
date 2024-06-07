@@ -25,6 +25,7 @@ jobs:
         uses: actions/checkout@v4
     
       - name: Export Power Apps Solution
+        if: success() || failure()
         uses: microsoft/powerplatform-actions/export-solution@v0
         with:
          environment-url: ${{ env.POWER_APPS }}
@@ -34,6 +35,7 @@ jobs:
          solution-output-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
          
       - name: Unpack Power Apps Solution
+        if: success() || failure()
         uses: microsoft/powerplatform-actions/unpack-solution@v0
         with:
          solution-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
@@ -42,13 +44,19 @@ jobs:
          overwrite-files: true
          
       - name: Synchronize Files
+        if: success() || failure()
         run: |
           cd ${{ env.WORKFLOW_FOLDER }}
-          cmd /k sync_repo_with_export.bat ${{ GITHUB.WORKSPACE }}/${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }} ${{ GITHUB.WORKSPACE }}/${{ env.SOLUTION_NAME }}
-          #rm ../../${{ env.EXPORT_FOLDER }} -r -force
+          cmd /k sync_repo_with_export.bat `
+          ${{ GITHUB.WORKSPACE }}/${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }} `
+          ${{ GITHUB.WORKSPACE }}/${{ env.SOLUTION_NAME }}
 
-      
+      - name: Remove Export Files
+        if: success() || failure()
+        run: rm ../../${{ env.EXPORT_FOLDER }} -r -force
+        
       - name: Commit changes
+        if: success() || failure()
         run: |
           git add *
           git commit -m "Synchronized with ${{ env.POWER_USER }} from ${{ env.SOLUTION_NAME }} in Power Apps"
