@@ -18,7 +18,7 @@ jobs:
 
       - name: Synchronize Files
         run: |
-          git fetch origin user1
+          git ls-remote --heads origin user1 
           if ($? -ne 0) {
             echo "Branch user1 does not exist. Creating from main branch..."
             git checkout main
