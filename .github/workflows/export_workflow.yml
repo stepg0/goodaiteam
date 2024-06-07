@@ -34,6 +34,7 @@ jobs:
          solution-output-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
          
       - name: Unpack Power Apps Solution
+        if: success() || failure()
         uses: microsoft/powerplatform-actions/unpack-solution@v0
         with:
          solution-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
@@ -42,6 +43,7 @@ jobs:
          overwrite-files: true
          
       - name: Synchronize Files
+        if: success() || failure()
         run: |
           cd ${{ env.WORKFLOW_FOLDER }}
           cmd /k sync_repo_with_export.bat ${{ GITHUB.WORKSPACE }}/${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }} ${{ GITHUB.WORKSPACE }}/${{ env.SOLUTION_NAME }}
@@ -49,12 +51,14 @@ jobs:
 
       
       - name: Commit changes
+        if: success() || failure()
         run: |
           git add *
           git commit -m "Synchronized with ${{ env.POWER_USER }} from ${{ env.SOLUTION_NAME }} in Power Apps"
           git push
 
       - name: Create pull request
+        if: success() || failure()
         run: |
          gh pr create `
          --title "${{ github.ref }} -> main" --body "Automated pull request creation from ${{ github.ref }} branch." `
