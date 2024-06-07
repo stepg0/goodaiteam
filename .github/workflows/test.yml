@@ -9,6 +9,7 @@ env:
   POWER_PWD: 'Fuy71602' #EACH USER
   SOLUTION_NAME: Technical
   EXPORT_FOLDER: .github/workflows
+  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
   
 jobs:
   commit-from-power-apps:
@@ -24,15 +25,14 @@ jobs:
         run: |
           git config --global user.name ${{ github.actor }}
           git config --global user.email "step-go@hotmail.com"
-          echo ${{ secrets.GH_TOKEN }}
+          echo ${{ secrets.GH_TOKENs }}
           
       - name: Commit changes
         run: |
           git add my_file.txt
           git commit -m "Add my_file.txt"
           git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        
 
 
 
