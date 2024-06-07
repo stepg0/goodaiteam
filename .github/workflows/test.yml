@@ -25,13 +25,13 @@ jobs:
 
       - name: Create pull request
         run: |
-         gh pr create 
-            --title "${{ github.ref }} -> main"
-            --body "Automated pull request creation from ${{ github.ref }} branch."
-            --reviewer "stepg0"
-            --base "main"
-            --head "${{ github.ref }}"
-            --repo "${{ github.repository }"
+         gh pr create \
+            --title "${{ github.ref }} -> main" \
+            --body "Automated pull request creation from ${{ github.ref }} branch." \
+            --reviewer ${{ github.actor }} \
+            --base "main" \
+            --head "${{ github.ref }}" \
+            --repo "${{ github.repository }}"
 
         
 
