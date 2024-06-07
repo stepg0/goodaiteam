@@ -43,10 +43,18 @@ jobs:
          solution-folder: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}
          solution-type: 'unmanaged'
          overwrite-files: true
-         
+
+      - name: Commit Export
+        id: commitex
+        if: steps.unpack.outcome == 'success'
+        run: |
+          git add *
+          git commit -m "Exported solution ${{ env.SOLUTION_NAME }} in Power Apps by ${{ env.POWER_USER }}"
+          git push
+          
       - name: Synchronize Files
         id: sync
-        if: steps.unpack.outcome == 'success'
+        if: steps.commitex.outcome == 'success'
         run: |
           cd ${{ env.WORKFLOW_FOLDER }}
           cmd /k sync_repo_with_export.bat `
