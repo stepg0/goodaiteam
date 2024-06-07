@@ -53,7 +53,7 @@ jobs:
 
       - name: Remove Export Files
         if: success() || failure()
-        run: rm ../../${{ env.EXPORT_FOLDER }} -r -force
+        run: rm ${{ env.EXPORT_FOLDER }} -r -force
         
       - name: Commit changes
         if: success() || failure()
