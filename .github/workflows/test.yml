@@ -32,6 +32,7 @@ jobs:
           git add my_file.txt
           git commit -m "Add my_file.txt"
           git push
+          gh pr create --base main --head my-feature-branch --title "My Pull Request" --body "Description of changes"
         
 
 
