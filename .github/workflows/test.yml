@@ -18,20 +18,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Create file
-        run: echo "Hello, World!" > my_file.txt
-
       - name: Configure Git
         run: |
           git config --global user.name ${{ github.actor }}
           git config --global user.email "step-go@hotmail.com"
-          echo ${{ secrets.GH_TOKEN }}
-          
-      - name: Commit changes
-        run: |
-          git add my_file.txt
-          git commit -m "Add my_file.txt"
-          git push
 
       - name: Create pull request
         run: |
