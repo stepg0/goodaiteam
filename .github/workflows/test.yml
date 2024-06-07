@@ -32,7 +32,23 @@ jobs:
           git add my_file.txt
           git commit -m "Add my_file.txt"
           git push
-          gh pr create --base main --head my-feature-branch --title "My Pull Request" --body "Description of changes"
+
+      - name: Create pull request
+        run: |
+         # Use the GitHub CLI to create a pull request
+         gh pr create \
+           # Set the title of the pull request
+           --title "${{ github.ref }} -> main" \
+           # Set the commit message for the pull request
+           --body "Automated pull request creation from ${{ github.ref }} branch." \
+           # Specify the github reviewer user id for the pull request --reviewer "reviewer user id" \
+           # Specify the base branch name for the pull request
+           --base "main" \
+           # Specify the head branch for the pull request
+           --head "${{ github.ref }}" \
+           # Specify the repository where the pull request will be created
+           --repo "${{ github.repository }}"
+
         
 
 
