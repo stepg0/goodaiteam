@@ -8,7 +8,7 @@ set "FolderWithChanges=%1"
 REM FolderStartingPoint is the local repo
 set "FolderStartingPoint=%2"
 
-echo sync_repo_with_export
+
 
 REM fc https://learn.microsoft.com/de-de/windows-server/administration/windows-commands/fc result of fc -> ERRORLEVEL
 REM errorlevel: 0  / No differences encountered -> do not overwrite
@@ -19,7 +19,7 @@ REM errorlevel: -1 / Invalid syntax
 REM ----------- START DELETE from REPO --------------
 REM list all folders in FolderStartingPoint recursively
 for /f "delims=" %%D in ('echo "."^&forfiles /s /p "%FolderStartingPoint%" /m "%fileMask%" /c "cmd /c if @isdir==TRUE echo @relpath"') do (
-	echo directory "%%D"
+	REM debug echo directory "%%D"
 	
 	for /f "delims=" %%F in ('dir /b "%FolderStartingPoint%\%%D"') do (
 		REM ignore folders
@@ -60,8 +60,10 @@ for /f "delims=" %%D in ('echo "."^&forfiles /s /p "%FolderWithChanges%" /m "%fi
 				)
 			) else (
 				REM Cannot find file -> take file from FolderWithChanges
-				xcopy /S /Q /Y /F "%FolderWithChanges%\%%D\%%F" "%FolderStartingPoint%\%%D\%%F\" REM create folder structure first
-				copy "%FolderWithChanges%\%%D\%%F" "%FolderStartingPoint%\%%D\%%F" REM copy file
+				REM create folder structure first
+				xcopy /S /Q /Y /F "%FolderWithChanges%\%%D\%%F" "%FolderStartingPoint%\%%D\%%F\"
+				REM copy file
+				copy "%FolderWithChanges%\%%D\%%F" "%FolderStartingPoint%\%%D\%%F"
 				echo Copied from FolderWithChanges "%%F"
 			)
 			REM debug echo file "%%F"
