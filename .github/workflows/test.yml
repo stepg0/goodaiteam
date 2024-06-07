@@ -19,14 +19,14 @@ jobs:
       - name: Synchronize Files
         run: |
           git fetch origin user1
-          if [ $? -ne 0 ]; then
+          if ($? -ne 0) {
             echo "Branch user1 does not exist. Creating from main branch..."
             git checkout main
             git checkout -b user1
             git push origin user1
-          else
+          } else {
             echo "Branch user1 already exists."
-          fi
+          }
 
 
 
