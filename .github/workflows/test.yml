@@ -18,7 +18,14 @@ jobs:
 
       - name: Synchronize Files
         run: |
-          dir
-          cd ${{ GITHUB.WORKSPACE }}/${{ env.EXPORT_FOLDER }}
-          dir
-          cmd /k sync_repo_with_export.bat ./${{ env.SOLUTION_NAME }} ../../.
+          git fetch origin ${{ env.POWER_USER }}
+          if [ $? -ne 0 ]; then
+            echo "Branch user1 does not exist. Creating from main branch..."
+            git checkout main
+            git checkout -b ${{ env.POWER_USER }}
+            git push origin ${{ env.POWER_USER }}
+          else
+            echo "Branch ${{ env.POWER_USER }} already exists."
+          fi
+
+
