@@ -17,17 +17,13 @@ jobs:
       - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GH_TOKENs }} 
-      - name: Synchronize Files
+      - name: Commit changes
         run: |
-          git ls-remote --heads origin user1 
-          if ($? -ne 0) {
-            echo "Branch user1 does not exist. Creating from main branch..."
-            git checkout main
-            git checkout -b user1
-            git push origin user1
-          } else {
-            echo "Branch user1 already exists."
-          }
+          git add my_file.txt
+          git commit -m "Add my_file.txt"
+          git push
+
+
 
 
 
