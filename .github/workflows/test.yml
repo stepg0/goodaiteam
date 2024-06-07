@@ -9,7 +9,7 @@ env:
   POWER_PWD: 'Fuy71602' #EACH USER
   SOLUTION_NAME: Technical
   EXPORT_FOLDER: .github/workflows
-  GH_TOKEN: ${{ secrets.GH_TOKEN }}  # Set the GH_TOKEN environment variable with the GitHub token
+  GH_TOKEN: ${{ secrets.GH_TOKENs }}  # Set the GH_TOKEN environment variable with the GitHub token
   
 jobs:
   commit-from-power-apps:
