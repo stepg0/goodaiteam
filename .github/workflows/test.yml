@@ -25,7 +25,7 @@ jobs:
         run: |
           git config --global user.name ${{ github.actor }}
           git config --global user.email "step-go@hotmail.com"
-          echo ${{ secrets.GH_TOKENs }}
+          echo ${{ secrets.GH_TOKEN }}
           
       - name: Commit changes
         run: |
