@@ -19,7 +19,7 @@ jobs:
       - name: Synchronize Files
         run: |
          git fetch origin ${{ env.POWER_USER }}
-         if [ $? -ne 0 ]; then
+         if[$? -ne 0]; then
           echo "Branch user1 does not exist. Creating from main branch..."
           git checkout main
           git checkout -b ${{ env.POWER_USER }}
