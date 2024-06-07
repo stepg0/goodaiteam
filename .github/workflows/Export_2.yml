@@ -19,18 +19,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         
+      - name: Configure Git
+        run: |
+          git config --global user.name ${{ github.actor }}
+          git config --global user.email "step-go@hotmail.com"  
+          
       - name: Synchronize Files
         if: success() || failure()
         run: |
           cd ${{ env.WORKFLOW_FOLDER }}
           cmd /k sync_repo_with_export.bat ${{ GITHUB.WORKSPACE }}\${{ env.EXPORT_FOLDER }}\${{ env.SOLUTION_NAME }} ${{ GITHUB.WORKSPACE }}\${{ env.SOLUTION_NAME }}
           # rm ../../${{ env.EXPORT_FOLDER }} -r -force
-          
-      - name: Configure Git
-        run: |
-          git config --global user.name ${{ github.actor }}
-          git config --global user.email "step-go@hotmail.com"
 
+      - name: Remove Export Files
+        id: remove
+        if: steps.sync.outcome == 'success'
+        run: rm ${{ env.EXPORT_FOLDER }} -r -force
+        
       - name: Commit changes
         run: |
           git add *
