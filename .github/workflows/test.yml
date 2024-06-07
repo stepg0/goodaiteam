@@ -24,6 +24,7 @@ jobs:
         run: |
           git config --global user.name ${{ github.actor }}
           git config --global user.email "step-go@hotmail.com"
+          echo ${{ secrets.GH_TOKEN }}
           
       - name: Commit changes
         run: |
@@ -31,7 +32,7 @@ jobs:
           git commit -m "Add my_file.txt"
           git push
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
 
 
