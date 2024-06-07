@@ -21,9 +21,10 @@ jobs:
           git config --global user.name ${{ github.actor }}
           git config --global user.email "step-go@hotmail.com"
           
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
     
-      - name: export-solution action
+      - name: Export Power Apps Solution
         uses: microsoft/powerplatform-actions/export-solution@v0
         with:
          environment-url: ${{ env.POWER_APPS }}
@@ -32,7 +33,7 @@ jobs:
          solution-name: ${{ env.SOLUTION_NAME }}
          solution-output-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
          
-      - name: unpack-solution action
+      - name: Unpack Power Apps Solution
         uses: microsoft/powerplatform-actions/unpack-solution@v0
         with:
          solution-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
@@ -44,8 +45,9 @@ jobs:
         run: |
           cd ${{ env.WORKFLOW_FOLDER }}
           cmd /k sync_repo_with_export.bat ${{ GITHUB.WORKSPACE }}/${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }} ${{ GITHUB.WORKSPACE }}/${{ env.SOLUTION_NAME }}
-          rm ../../${{ env.EXPORT_FOLDER }} -r -force
+          # rm ../../${{ env.EXPORT_FOLDER }} -r -force
 
+      
       - name: Commit changes
         run: |
           git add *
