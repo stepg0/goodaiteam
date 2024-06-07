@@ -31,7 +31,11 @@ jobs:
           git config --global user.name ${{ github.actor }}
           git config --global user.email "step-go@hotmail.com"
 
-
+      - name: Commit changes
+        run: |
+          git add *
+          git commit -m "Synchronized with ${{ env.POWER_USER }} from ${{ env.SOLUTION_NAME }} in Power Apps"
+          git push
 
 
 
