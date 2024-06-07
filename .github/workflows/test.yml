@@ -18,14 +18,16 @@ jobs:
 
       - name: Synchronize Files
         run: |
-         git fetch origin ${{ env.POWER_USER }}
-         if[$? -ne 0]; then
-          echo "Branch user1 does not exist. Creating from main branch..."
-          git checkout main
-          git checkout -b ${{ env.POWER_USER }}
-          git push origin ${{ env.POWER_USER }}
-         else
-          echo "Branch ${{ env.POWER_USER }} already exists."
-         fi
+          git fetch origin user1
+          if [ $? -ne 0 ]; then
+            echo "Branch user1 does not exist. Creating from main branch..."
+            git checkout main
+            git checkout -b user1
+            git push origin user1
+          else
+            echo "Branch user1 already exists."
+          fi
+
+
 
 
