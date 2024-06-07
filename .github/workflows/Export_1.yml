@@ -21,11 +21,13 @@ jobs:
           git config --global user.name ${{ github.actor }}
           git config --global user.email "step-go@hotmail.com"
           
-      - name: Checkout
+      - id: checkout
+        name: Checkout
         uses: actions/checkout@v4
     
-      - name: Export Power Apps Solution
-        id: export
+      - id: export
+        if: steps.checkout.outcome == 'success'
+        name: Export Power Apps Solution
         uses: microsoft/powerplatform-actions/export-solution@v0
         with:
          environment-url: ${{ env.POWER_APPS }}
@@ -34,9 +36,9 @@ jobs:
          solution-name: ${{ env.SOLUTION_NAME }}
          solution-output-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
          
-      - name: Unpack Power Apps Solution
-        id: unpack
+      - id: unpack
         if: steps.export.outcome == 'success'
+        name: Unpack Power Apps Solution
         uses: microsoft/powerplatform-actions/unpack-solution@v0
         with:
          solution-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
@@ -44,9 +46,9 @@ jobs:
          solution-type: 'unmanaged'
          overwrite-files: true
          
-      - name: Commit changes
-        id: commit
-        if: steps.sync.outcome == 'success'
+      - id: commit
+        if: steps.unpack.outcome == 'success'
+        name: Commit changes
         run: |
           git add *
           git commit -m "Exported solution ${{ env.SOLUTION_NAME }} in Power Apps by ${{ env.POWER_USER }}"
