@@ -1,1 +1,0 @@
-echo inside newbat.bat
