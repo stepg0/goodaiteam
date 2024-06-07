@@ -23,7 +23,7 @@ jobs:
         if: success() || failure()
         run: |
           cd ${{ env.WORKFLOW_FOLDER }}
-          cmd /k sync_repo_with_export.bat ${{ GITHUB.WORKSPACE }}/${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}/ ${{ GITHUB.WORKSPACE }}/${{ env.SOLUTION_NAME }}/
+          cmd /k sync_repo_with_export.bat ${{ GITHUB.WORKSPACE }}\${{ env.EXPORT_FOLDER }}\${{ env.SOLUTION_NAME }}\ ${{ GITHUB.WORKSPACE }}\${{ env.SOLUTION_NAME }}\
           # rm ../../${{ env.EXPORT_FOLDER }} -r -force
           
       - name: Configure Git
