@@ -14,7 +14,11 @@ jobs:
   commit-from-power-apps:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create file
+        run: echo "Hello, World!" > my_file.txt
 
       - name: Configure Git
         run: |
