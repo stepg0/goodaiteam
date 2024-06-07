@@ -8,7 +8,8 @@ env:
   POWER_USER: 'SkillboosterCCAPart13@mscloudguild.onmicrosoft.com' #EACH USER
   POWER_PWD: 'Fuy71602' #EACH USER
   SOLUTION_NAME: Technical
-  EXPORT_FOLDER: .github/workflows
+  EXPORT_FOLDER: export
+  WORKFLOW_FOLDER: .github/workflows
   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
   
 jobs:
@@ -17,7 +18,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
+        
+      - name: Synchronize Files
+        if: success() || failure()
+        run: |
+          cd ${{ env.WORKFLOW_FOLDER }}
+          cmd /k sync_repo_with_export.bat ${{ GITHUB.WORKSPACE }}/${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }} ${{ GITHUB.WORKSPACE }}/${{ env.SOLUTION_NAME }}
+          # rm ../../${{ env.EXPORT_FOLDER }} -r -force
+          
       - name: Configure Git
         run: |
           git config --global user.name ${{ github.actor }}
