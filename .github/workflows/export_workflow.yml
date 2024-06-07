@@ -42,8 +42,9 @@ jobs:
          
       - name: Synchronize Files
         run: |
-          cmd /k "${{ env.WORKFLOW_FOLDER }}/sync_repo_with_export.bat" ${{ GITHUB.WORKSPACE }}/${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }} ${{ GITHUB.WORKSPACE }}/${{ env.SOLUTION_NAME }}
-          rm ${{ env.EXPORT_FOLDER }} -r -force
+          cd ${{ env.WORKFLOW_FOLDER }}
+          cmd /k sync_repo_with_export.bat ${{ GITHUB.WORKSPACE }}/${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }} ${{ GITHUB.WORKSPACE }}/${{ env.SOLUTION_NAME }}
+          rm ../${{ env.EXPORT_FOLDER }} -r -force
 
       - name: Commit changes
         run: |
