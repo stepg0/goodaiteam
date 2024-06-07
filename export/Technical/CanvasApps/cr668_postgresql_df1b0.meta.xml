@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>cr668_postgresql_df1b0</Name>
+  <AppVersion>2024-05-08T09:12:30Z</AppVersion>
+  <Status>Ready</Status>
+  <CreatedByClientVersion>3.24045.17.0</CreatedByClientVersion>
+  <MinClientVersion>3.24045.17.0</MinClientVersion>
+  <Tags>{"primaryDeviceWidth":"1366","primaryDeviceHeight":"768","supportsPortrait":"true","supportsLandscape":"true","primaryFormFactor":"Tablet","showStatusBar":"false","publisherVersion":"3.24045.17","minimumRequiredApiVersion":"2.2.0","hasComponent":"false","hasUnlockedComponent":"false","isUnifiedRootApp":"false"}</Tags>
+  <IsCdsUpgraded>0</IsCdsUpgraded>
+  <GalleryItemId xsi:nil="true"></GalleryItemId>
+  <BackgroundColor>RGBA(0,176,240,1)</BackgroundColor>
+  <DisplayName>PostgreSQL</DisplayName>
+  <Description>test of postgres with admin db</Description>
+  <CommitMessage>Save app with description provided in publish dialog.</CommitMessage>
+  <Publisher xsi:nil="true"></Publisher>
+  <AuthorizationReferences>[]</AuthorizationReferences>
+  <ConnectionReferences>{"fd867609-84e7-498a-bdf7-a2a50e063980":{"id":"/providers/microsoft.powerapps/apis/shared_postgresql","xrmConnectionReferenceLogicalName":"cr668_a97e94239111448aa26fcd58af273605","displayName":"PostgreSQL","executionRestrictions":{"version":1,"modifiedOn":"2024-05-08 09:12:30","appVer":"3.24045.17","apiId":"/providers/microsoft.powerapps/apis/shared_postgresql","apiVer":1,"policy":"{\"type\":\"tabular\",\"dataSources\":{\"[public].[skillbooster_ex_tab]\":[\"post\",\"patch\",\"get\"]}}"},"iconUri":"https://connectoricons-prod.azureedge.net/releases/v1.0.1677/1.0.1677.3637/postgresql/icon.png","dataSources":["public.skillbooster_ex_tab"],"dependencies":[],"dependents":["f4e601e9-7e38-4de8-8924-b83084622748","8119c8ce-1340-45c4-b114-1dcd7c405431"],"parameterHints":{},"parameterHintsV2":{},"isOnPremiseConnection":false,"sharedConnectionId":"fc964a9d-0238-4f60-be02-63f48fb913f1","bypassConsent":false,"dataSets":{"default":{"dataSources":{"public.skillbooster_ex_tab":{"tableName":"[public].[skillbooster_ex_tab]"}}}},"apiTier":"Premium","actions":["providers/PowerPlatform.Governance/Operations/Read","providers/PowerPlatform.Governance/Operations/Write"]},"f4e601e9-7e38-4de8-8924-b83084622748":{"id":"/providers/microsoft.powerapps/apis/shared_logicflows","displayName":"Logic flows","iconUri":"https://connectoricons-prod.azureedge.net/u/patelronak/specialtrain-logicflows-2/1.0.1692.3734/logicflows/icon.png","dataSources":["PostgresDeleteUser"],"dependencies":["fd867609-84e7-498a-bdf7-a2a50e063980"],"dependents":[],"parameterHints":{"workflowName":{"value":"36518a4a-dd20-45a8-a7ba-6815ddf68cb1"},"workflowEntityId":{"value":"321fce07-720c-ef11-9f89-6045bd17acdc"},"workflowDisplayName":{"value":"PostgresDeleteUser"},"fd867609-84e7-498a-bdf7-a2a50e063980":{"value":"shared_postgresql"}},"parameterHintsV2":{"workflowName":{"value":"36518a4a-dd20-45a8-a7ba-6815ddf68cb1"},"workflowEntityId":{"value":"321fce07-720c-ef11-9f89-6045bd17acdc"},"workflowDisplayName":{"value":"PostgresDeleteUser"},"shared_postgresql":{"value":"fd867609-84e7-498a-bdf7-a2a50e063980"}},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["Run"]},"8119c8ce-1340-45c4-b114-1dcd7c405431":{"id":"/providers/microsoft.powerapps/apis/shared_logicflows","displayName":"Logic flows","iconUri":"https://connectoricons-prod.azureedge.net/u/patelronak/specialtrain-logicflows-2/1.0.1692.3734/logicflows/icon.png","dataSources":["PostgresInsertUser"],"dependencies":["fd867609-84e7-498a-bdf7-a2a50e063980"],"dependents":[],"parameterHints":{"workflowName":{"value":"2afbbd75-fa62-407b-92a4-231c705ab2cc"},"workflowEntityId":{"value":"732d65ad-6e0c-ef11-9f89-6045bd17acdc"},"workflowDisplayName":{"value":"PostgresInsertUser"},"fd867609-84e7-498a-bdf7-a2a50e063980":{"value":"shared_postgresql"}},"parameterHintsV2":{"workflowName":{"value":"2afbbd75-fa62-407b-92a4-231c705ab2cc"},"workflowEntityId":{"value":"732d65ad-6e0c-ef11-9f89-6045bd17acdc"},"workflowDisplayName":{"value":"PostgresInsertUser"},"shared_postgresql":{"value":"fd867609-84e7-498a-bdf7-a2a50e063980"}},"isOnPremiseConnection":false,"bypassConsent":false,"dataSets":{},"apiTier":"Standard","actions":["Run"]}}</ConnectionReferences>
+  <DatabaseReferences>{}</DatabaseReferences>
+  <AppComponents>[]</AppComponents>
+  <AppComponentDependencies>[]</AppComponentDependencies>
+  <CanConsumeAppPass>0</CanConsumeAppPass>
+  <CanvasAppType>0</CanvasAppType>
+  <BypassConsent>0</BypassConsent>
+  <AdminControlBypassConsent>0</AdminControlBypassConsent>
+  <EmbeddedApp xsi:nil="true"></EmbeddedApp>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <CdsDependencies>{"cdsdependencies":[{"dependencyid":"321fce07-720c-ef11-9f89-6045bd17acdc","componenttype":29,"componenttypeplatformname":"Workflow"},{"dependencyid":"732d65ad-6e0c-ef11-9f89-6045bd17acdc","componenttype":29,"componenttypeplatformname":"Workflow"},{"logicalname":"cr668_a97e94239111448aa26fcd58af273605","componenttype":10093,"componenttypeplatformname":"ConnectionReference"}]}</CdsDependencies>
+  <IsCustomizable>1</IsCustomizable>
+  <BackgroundImageUri>/CanvasApps/cr668_postgresql_df1b0_BackgroundImageUri</BackgroundImageUri>
+  <DocumentUri>/CanvasApps/cr668_postgresql_df1b0_DocumentUri.msapp</DocumentUri>
+  <AdditionalUris>
+    <AdditionalUri>/CanvasApps/cr668_postgresql_df1b0_AdditionalUris0_identity.json</AdditionalUri>
+  </AdditionalUris>
+</CanvasApp>
