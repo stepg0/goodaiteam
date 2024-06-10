@@ -13,7 +13,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
   
 jobs:
-  commit-from-power-apps:
+  import-to-power-apps:
     runs-on: windows-latest
     steps:
       - name: Configure Git
