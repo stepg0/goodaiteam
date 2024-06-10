@@ -8,8 +8,6 @@ env:
   POWER_USER: 'SkillboosterCCAPart13@mscloudguild.onmicrosoft.com' #EACH USER
   POWER_PWD: 'Fuy71602' #EACH USER
   SOLUTION_NAME: Technical
-  EXPORT_FOLDER: export
-  WORKFLOW_FOLDER: .github/workflows
   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
   
 jobs:
@@ -30,8 +28,8 @@ jobs:
         name: Pack Power Apps Solution
         uses: microsoft/powerplatform-actions/pack-solution@v0
         with:
-         solution-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
-         solution-folder: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}
+         solution-file: ${{ env.SOLUTION_NAME }}.zip
+         solution-folder: ${{ env.SOLUTION_NAME }}
          solution-type: 'unmanaged'
          overwrite-files: true
          
@@ -43,7 +41,7 @@ jobs:
          environment-url: ${{ env.POWER_APPS }}
          user-name: ${{ env.POWER_USER }}
          password-secret: ${{ env.POWER_PWD }}
-         solution-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
+         solution-file: ${{ env.SOLUTION_NAME }}.zip
          force-overwrite: true
          publish-changes: true 
         
