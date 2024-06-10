@@ -20,6 +20,10 @@ jobs:
         run: |
           git config --global user.name ${{ github.actor }}
           git config --global user.email "step-go@hotmail.com"
+
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
         
       - name: Export Power Apps Solution
         id: export
@@ -40,9 +44,18 @@ jobs:
          solution-folder: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}
          solution-type: 'unmanaged'
          overwrite-files: true
-
+         
+      - name: Commit changes
+        id: commit1
+        if: steps.unpack.outcome == 'success'
+        run: |
+          git add *
+          git commit -m "Synchronized with ${{ env.POWER_USER }} from ${{ env.SOLUTION_NAME }} in Power Apps"
+          git push
+          
       - name: Refresh Files
         id: refresh
+        if: steps.commit1.outcome == 'success'
         uses: actions/checkout@v4
           
       - name: Synchronize Files
