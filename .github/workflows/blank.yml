@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
     
       - id: import
-        if: steps.pack.outcome == 'success'
+        if: steps.checkout.outcome == 'success'
         name: Import Power Apps Solution
         uses: microsoft/powerplatform-actions/import-solution@v0
         with:
