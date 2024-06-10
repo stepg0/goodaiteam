@@ -20,10 +20,7 @@ jobs:
         run: |
           git config --global user.name ${{ github.actor }}
           git config --global user.email "step-go@hotmail.com"
-          
-      - name: Checkout
-        uses: actions/checkout@v4
-    
+        
       - name: Export Power Apps Solution
         id: export
         uses: microsoft/powerplatform-actions/export-solution@v0
