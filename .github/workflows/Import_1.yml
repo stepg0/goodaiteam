@@ -9,6 +9,7 @@ env:
   POWER_PWD: 'Fuy71602' #EACH USER
   SOLUTION_NAME: Technical
   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+  RUNNER_DEBUG: 1
   
 jobs:
   import-to-power-apps:
