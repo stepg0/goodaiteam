@@ -34,7 +34,7 @@ jobs:
          overwrite-files: true
          
       - id: import
-        if: steps.export.outcome == 'success'
+        if: steps.pack.outcome == 'success'
         name: Import Power Apps Solution
         uses: microsoft/powerplatform-actions/import-solution@v0
         with:
