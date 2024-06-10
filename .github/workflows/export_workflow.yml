@@ -54,6 +54,7 @@ jobs:
           git push
           
   sync-solution-repo:
+    needs: export-from-power-apps
     runs-on: windows-latest
     steps:
       - name: Configure Git
@@ -88,6 +89,7 @@ jobs:
           git push
           
   create-pull-request:
+    needs: [sync-solution-repo, export-from-power-apps]
     runs-on: windows-latest
     steps:
       - name: Configure Git
