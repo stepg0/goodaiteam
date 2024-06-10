@@ -1,0 +1,49 @@
+name: Import_1 Zip Directory and Import to Power Apps
+
+on:
+  workflow_dispatch:
+  
+env:
+  POWER_APPS: 'https://skillboosterccapart13senvironmen.crm16.dynamics.com'
+  POWER_USER: 'SkillboosterCCAPart13@mscloudguild.onmicrosoft.com' #EACH USER
+  POWER_PWD: 'Fuy71602' #EACH USER
+  SOLUTION_NAME: Technical
+  EXPORT_FOLDER: export
+  WORKFLOW_FOLDER: .github/workflows
+  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+  
+jobs:
+  commit-from-power-apps:
+    runs-on: windows-latest
+    steps:
+      - name: Configure Git
+        run: |
+          git config --global user.name ${{ github.actor }}
+          git config --global user.email "step-go@hotmail.com"
+          
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v4
+    
+      - id: pack
+        if: steps.checkout.outcome == 'success'
+        name: Pack Power Apps Solution
+        uses: microsoft/powerplatform-actions/pack-solution@v0
+        with:
+         solution-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
+         solution-folder: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}
+         solution-type: 'unmanaged'
+         overwrite-files: true
+         
+      - id: import
+        if: steps.export.outcome == 'success'
+        name: Import Power Apps Solution
+        uses: microsoft/powerplatform-actions/import-solution@v0
+        with:
+         environment-url: ${{ env.POWER_APPS }}
+         user-name: ${{ env.POWER_USER }}
+         password-secret: ${{ env.POWER_PWD }}
+         solution-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
+         force-overwrite: true
+         publish-changes: true 
+        
