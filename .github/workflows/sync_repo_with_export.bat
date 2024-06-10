@@ -61,7 +61,7 @@ for /f "delims=" %%D in ('echo "."^&forfiles /s /p "%FolderWithChanges%" /m "%fi
 			) else (
 				REM Cannot find file -> take file from FolderWithChanges
 				REM create folder structure first
-				xcopy /S /Q /Y /F "%FolderWithChanges%\%%D\%%F" "%FolderStartingPoint%\%%D\%%F\"
+				xcopy /S /Q /Y /F "%FolderWithChanges%\%%D\" "%FolderStartingPoint%\%%D\"
 				REM copy file
 				copy "%FolderWithChanges%\%%D\%%F" "%FolderStartingPoint%\%%D\%%F"
 				echo Copied from FolderWithChanges "%%F"
