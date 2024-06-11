@@ -32,7 +32,7 @@ jobs:
          environment-url: ${{ env.POWER_APPS }}
          user-name: ${{ env.POWER_USER }}
          password-secret: ${{ env.POWER_PWD }}
-         solution-file: ${{ env.SOLUTION_NAME }}.zip
+         solution-file: export\${{ env.SOLUTION_NAME }}.zip
          force-overwrite: true
          publish-changes: true 
         
