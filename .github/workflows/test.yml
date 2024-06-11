@@ -16,3 +16,6 @@ jobs:
         run: |
           mkdir export\Technical
           tar -xf export\Technical.zip -C export\Technical
+          git add *
+          git commit -m "Exported solution ${{ env.SOLUTION_NAME }} in Power Apps by ${{ env.POWER_USER }}"
+          git push
