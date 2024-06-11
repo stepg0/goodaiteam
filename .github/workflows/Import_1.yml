@@ -30,7 +30,7 @@ jobs:
         uses: microsoft/powerplatform-actions/pack-solution@v0
         with:
          solution-file: ${{ env.SOLUTION_NAME }}.zip
-         solution-folder: export\${{ env.SOLUTION_NAME }}
+         solution-folder: ${{ env.SOLUTION_NAME }}
          solution-type: 'unmanaged'
          overwrite-files: true
 
