@@ -27,7 +27,7 @@ jobs:
       - id: pack
         if: steps.checkout.outcome == 'success'
         name: Pack Power Apps Solution
-        uses: microsoft/powerplatform-actions/pack-solution@v0
+        uses: microsoft/powerplatform-actions/pack-solution@v1
         with:
          solution-file: ${{ env.SOLUTION_NAME }}.zip
          solution-folder: export\${{ env.SOLUTION_NAME }}
@@ -45,7 +45,7 @@ jobs:
       - id: import
         if: steps.pack.outcome == 'success'
         name: Import Power Apps Solution
-        uses: microsoft/powerplatform-actions/import-solution@v0
+        uses: microsoft/powerplatform-actions/import-solution@v1
         with:
          environment-url: ${{ env.POWER_APPS }}
          user-name: ${{ env.POWER_USER }}
