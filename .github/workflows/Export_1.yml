@@ -16,6 +16,9 @@ jobs:
   export-from-power-apps:
     runs-on: windows-latest
     steps:
+      - name: Install Power Platform Tools
+        uses: microsoft/powerplatform-actions/actions-install@v1
+        
       - name: Configure Git
         run: |
           git config --global user.name ${{ github.actor }}
@@ -28,7 +31,7 @@ jobs:
       - id: export
         if: steps.checkout.outcome == 'success'
         name: Export Power Apps Solution
-        uses: microsoft/powerplatform-actions/export-solution@v0
+        uses: microsoft/powerplatform-actions/export-solution@v1
         with:
          environment-url: ${{ env.POWER_APPS }}
          user-name: ${{ env.POWER_USER }}
@@ -39,7 +42,7 @@ jobs:
       - id: unpack
         if: steps.export.outcome == 'success'
         name: Unpack Power Apps Solution
-        uses: microsoft/powerplatform-actions/unpack-solution@v0
+        uses: microsoft/powerplatform-actions/unpack-solution@v1
         with:
          solution-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
          solution-folder: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}
