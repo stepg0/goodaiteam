@@ -32,14 +32,6 @@ jobs:
          solution-folder: export\${{ env.SOLUTION_NAME }}
          solution-type: 'unmanaged'
          overwrite-files: true
-
-      - id: commit
-        if: steps.pack.outcome == 'success'
-        name: Commit changes
-        run: |
-          git add *
-          git commit -m "Packed solution ${{ env.SOLUTION_NAME }} in Power Apps by ${{ env.POWER_USER }}"
-          git push
           
       - id: import
         if: steps.pack.outcome == 'success'
