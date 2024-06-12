@@ -4,12 +4,8 @@ on:
   workflow_dispatch:
   
 env:
-  POWER_APPS: 'https://skillboosterccapart13senvironmen.crm16.dynamics.com'
-  POWER_USER: 'SkillboosterCCAPart13@mscloudguild.onmicrosoft.com' #EACH USER
-  POWER_PWD: 'Fuy71602' #EACH USER
   SOLUTION_NAME: Technical
   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-  RUNNER_DEBUG: 1
   
 jobs:
   import-to-power-apps:
@@ -50,9 +46,9 @@ jobs:
         name: Import Power Apps Solution
         uses: microsoft/powerplatform-actions/import-solution@v1
         with:
-         environment-url: ${{ env.POWER_APPS }}
-         user-name: ${{ env.POWER_USER }}
-         password-secret: ${{ env.POWER_PWD }}
+         environment-url: ${{ vars.POWER_APPS }}
+         user-name: ${{ vars.POWER_USER }}
+         password-secret: ${{ secrets.POWER_PWD }}
          solution-file: ${{ env.SOLUTION_NAME }}.zip
          force-overwrite: true
          publish-changes: true 
