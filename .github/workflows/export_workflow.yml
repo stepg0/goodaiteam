@@ -4,9 +4,6 @@ on:
   workflow_dispatch:
   
 env:
-  POWER_APPS: 'https://skillboosterccapart13senvironmen.crm16.dynamics.com'
-  POWER_USER: 'SkillboosterCCAPart13@mscloudguild.onmicrosoft.com' #EACH USER
-  POWER_PWD: ${{ secrets.POWER_PWD }}
   SOLUTION_NAME: Technical
   EXPORT_FOLDER: export
   WORKFLOW_FOLDER: .github/workflows
@@ -34,7 +31,7 @@ jobs:
         with:
          environment-url: ${{ vars.POWER_APPS }}
          user-name: ${{ vars.POWER_USER }}
-         password-secret: ${{ env.POWER_PWD }}
+         password-secret: ${{ secrets.POWER_PWD }}
          solution-name: ${{ env.SOLUTION_NAME }}
          solution-output-file: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip
          
