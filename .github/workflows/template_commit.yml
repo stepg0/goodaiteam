@@ -5,45 +5,45 @@ on:
    inputs:
     #Change this value
     solution_name:
-	   description: 'name of the solution to worked on from Power Platform'
-	   required: true
-	   default:  <SolutionName>
+     description: 'name of the solution to worked on from Power Platform'
+     required: true
+     default:  <SolutionName>
 	
     power_env:
-	   description: 'development environment url of each power platform user, used to export the solution from Power Platform environment'
-	   required: true
-	   default:  <SolutionName>
+     description: 'development environment url of each power platform user, used to export the solution from Power Platform environment'
+     required: true
+     default:  <SolutionName>
 	
     power_user:
-	   description: 'login name of each power platform user, used to export the solution from Power Platform environment'
-	   required: true
-	   default:  <SolutionName>
+     description: 'login name of each power platform user, used to export the solution from Power Platform environment'
+     required: true
+     default:  <SolutionName>
 	
     gh_email:
-	   description: 'Github email of each user, used to commit and create pull request'
+     description: 'Github email of each user, used to commit and create pull request'
      required: true
 	 
    secrets:
     gh_token:
-	   description: 'Github PAT of each user, used to commit and create pull request'
+     description: 'Github PAT of each user, used to commit and create pull request'
      required: true
 	 
     power_pwd:
-	   description: 'login password of each Power Platform user, used to export the solution from Power Platform environment'
+     description: 'login password of each Power Platform user, used to export the solution from Power Platform environment'
      required: true
 
 
    env:
     #Do Not change these values
     solution_exported_folder:
-	   description: 'folder name for staging the exported solution *do not change*'
-	   required: true
-	   default: out/exported/
+     description: 'folder name for staging the exported solution *do not change*'
+     required: true
+     default: out/exported/
 
     solution_folder:
-	   description: 'staging the unpacked solution folder before check-in *do not change*'
-	   required: true
-	   default: out/solutions/
+     description: 'staging the unpacked solution folder before check-in *do not change*'
+     required: true
+     default: out/solutions/
 
     solution_target_folder:
      description: 'folder name to be created and checked in *do not change*'
@@ -86,7 +86,7 @@ jobs:
          solution-type: 'unmanaged'
          overwrite-files: true
 		 
-	    - name: Remove Zip Files
+      - name: Remove Zip Files
         id: remove
         if: steps.export.outcome == 'success'
         run: rm ${{ env.solution_exported_folder }}/${{ inputs.solution_name }}.zip -r -force
