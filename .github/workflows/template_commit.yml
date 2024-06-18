@@ -100,7 +100,7 @@ jobs:
           git push
           
   sync-solution-repo:
-    #needs: export-from-power-apps
+    needs: export-from-power-apps
     runs-on: windows-latest
     steps:
       - name: Configure Git
