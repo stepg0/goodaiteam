@@ -122,7 +122,7 @@ jobs:
       - name: Remove Export Files
         id: remove
         if: steps.sync.outcome == 'success'
-        run: rm ${{ GITHUB.WORKSPACE }}/${{ env.solution_folder }}/${{ inputs.solution_name }}/1 -r -force
+        run: rm ${{ GITHUB.WORKSPACE }}\${{ env.solution_folder }}\${{ inputs.solution_name }} -r -force
         
       - name: Commit changes
         id: commit
