@@ -39,13 +39,13 @@ on:
 
 env:
  #folder name for staging the exported solution *do not change*
- solution_exported_folder: out/exported/
+ solution_exported_folder: out/exported
 
  #staging the unpacked solution folder before check-in *do not change*
- solution_folder: out/solutions/
+ solution_folder: out/solutions
 
  #folder name to be created and checked in *do not change*
- solution_target_folder: solutions/
+ solution_target_folder: solutions
 
  #folder location for the sync batch file *do not change*
  sync_batch_folder: .github/workflows
