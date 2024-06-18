@@ -115,16 +115,14 @@ jobs:
       - name: Synchronize Files
         id: sync
         if: steps.checkout.outcome == 'success'
-        working-directory: ${{ env.sync_batch_folder }}
         run: |
-          cmd /k sync_repo_with_export.bat `
-          ${{ GITHUB.WORKSPACE }}/${{ env.solution_folder }}/${{ inputs.solution_name }} `
-          ${{ GITHUB.WORKSPACE }}/${{ env.solution_target_folder }}/${{ inputs.solution_name }}
+          cd ${{ env.sync_batch_folder }}
+          cmd /k sync_repo_with_export.bat ${{ GITHUB.WORKSPACE }}/${{ env.solution_folder }}/${{ inputs.solution_name }} ${{ GITHUB.WORKSPACE }}/${{ env.solution_target_folder }}/${{ inputs.solution_name }}
 
       - name: Remove Export Files
         id: remove
         if: steps.sync.outcome == 'success'
-        run: rm ${{ GITHUB.WORKSPACE }}/${{ env.solution_folder }}/${{ inputs.solution_name }} -r -force
+        run: rm ${{ GITHUB.WORKSPACE }}/${{ env.solution_folder }}/${{ inputs.solution_name }}/1 -r -force
         
       - name: Commit changes
         id: commit
