@@ -39,10 +39,10 @@ on:
 
 env:
  #folder name for staging the exported solution *do not change*
- solution_exported_folder: out/exported
+ solution_exported_folder: out\exported
 
  #staging the unpacked solution folder before check-in *do not change*
- solution_folder: out/solutions
+ solution_folder: out\solutions
 
  #folder name to be created and checked in *do not change*
  solution_target_folder: solutions
@@ -117,7 +117,7 @@ jobs:
         if: steps.checkout.outcome == 'success'
         run: |
           cd ${{ env.sync_batch_folder }}
-          cmd /k sync_repo_with_export.bat ${{ GITHUB.WORKSPACE }}/${{ env.solution_folder }}/${{ inputs.solution_name }} ${{ GITHUB.WORKSPACE }}/${{ env.solution_target_folder }}/${{ inputs.solution_name }}
+          cmd /k sync_repo_with_export.bat ${{ GITHUB.WORKSPACE }}\${{ env.solution_folder }}\${{ inputs.solution_name }} ${{ GITHUB.WORKSPACE }}\${{ env.solution_target_folder }}\${{ inputs.solution_name }}
 
       - name: Remove Export Files
         id: remove
