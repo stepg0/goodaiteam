@@ -82,12 +82,12 @@ jobs:
          solution-folder: ${{ env.solution_folder }}/${{ inputs.solution_name }}
          solution-type: 'unmanaged'
          overwrite-files: true
-		 
+
       - name: Remove Zip Files
         id: remove
         if: steps.export.outcome == 'success'
         run: rm ${{ env.solution_exported_folder }}/${{ inputs.solution_name }}.zip -r -force
-		
+
       - name: Commit changes
         id: commit1
         if: steps.remove.outcome == 'success'
