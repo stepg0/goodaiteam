@@ -9,29 +9,29 @@ on:
      type: string
      required: true
      default:  <SolutionName>
-	
+
     power_env:
      description: 'development environment url of each power platform user, used to export the solution from Power Platform environment'
      type: string
      required: true
      default:  <SolutionName>
-	
+
     power_user:
      description: 'login name of each power platform user, used to export the solution from Power Platform environment'
      type: string
      required: true
      default:  <SolutionName>
-	
+
     gh_email:
      description: 'Github email of each user, used to commit and create pull request'
      type: string
      required: true
-	 
+
    secrets:
     gh_token:
      description: 'Github PAT of each user, used to commit and create pull request'
      required: true
-	 
+
     power_pwd:
      description: 'login password of each Power Platform user, used to export the solution from Power Platform environment'
      required: true
