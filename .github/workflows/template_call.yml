@@ -5,7 +5,7 @@ on:
 
 jobs:
   call-workflow-passing-data:
-    uses: stepg0/goodaiteam/blob/main/.github/workflows/template_commit.yml@main
+    uses: stepg0/goodaiteam/.github/workflows/template_commit.yml@main
     with:
       solution_name: Technical
       power_env: ${{ vars.POWER_APPS }}
