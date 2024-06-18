@@ -16,14 +16,14 @@ REM errorlevel: 1  / Different file -> take file from FolderWithChanges
 REM errorlevel: 2  / Cannot find file ->  -> take file from FolderWithChanges
 REM errorlevel: -1 / Invalid syntax
 
-echo cd %FolderStartingPoint% 
-REM ----------- Check target folder exist, if not, create it --------------
+echo Check %FolderStartingPoint%, if not exists, create it 
 cd %FolderStartingPoint% 2>NUL && cd.. || mkdir %FolderStartingPoint%
 
 
 REM ----------- START DELETE from REPO --------------
-REM list all folders in FolderStartingPoint recursively
-echo list all folders in FolderStartingPoint recursively 
+
+echo START DELETE from REPO - list all folders in FolderStartingPoint recursively 
+
 for /f "delims=" %%D in ('echo "."^&forfiles /s /p "%FolderStartingPoint%" /m "%fileMask%" /c "cmd /c if @isdir==TRUE echo @relpath"') do (
 	REM debug echo directory "%%D"
 	
@@ -48,7 +48,9 @@ REM ----------- END DELETE from REPO --------------
 
 
 REM ----------- START COPY from EXPORT --------------
-REM list all folders in FolderWithChanges recursively
+
+echo START COPY from EXPORT - list all folders in FolderWithChanges recursively 
+
 for /f "delims=" %%D in ('echo "."^&forfiles /s /p "%FolderWithChanges%" /m "%fileMask%" /c "cmd /c if @isdir==TRUE echo @relpath"') do (
 	REM debug echo directory "%%D"
 	
