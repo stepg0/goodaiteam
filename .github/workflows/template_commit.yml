@@ -96,7 +96,9 @@ jobs:
         if: steps.remove1.outcome == 'success'
         run: |
           cd ${{ env.sync_batch_folder }}
-          cmd /k sync_repo_with_export.bat ${{ GITHUB.WORKSPACE }}\${{ env.solution_folder }}\${{ inputs.solution_name }} ${{ GITHUB.WORKSPACE }}\${{ env.solution_target_folder }}\${{ inputs.solution_name }}
+          cmd /k sync_repo_with_export.bat `
+          ${{ GITHUB.WORKSPACE }}\${{ env.solution_folder }}\${{ inputs.solution_name }} `
+          ${{ GITHUB.WORKSPACE }}\${{ env.solution_target_folder }}\${{ inputs.solution_name }}
 
       - name: Remove Export Files
         id: remove2
