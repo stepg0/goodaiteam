@@ -94,8 +94,8 @@ jobs:
       - name: Synchronize Files
         id: sync
         if: steps.remove1.outcome == 'success'
+        working-directory: ${{ env.sync_batch_folder }}
         run: |
-          cd ${{ env.sync_batch_folder }}
           cmd /k sync_repo_with_export.bat `
           ${{ GITHUB.WORKSPACE }}\${{ env.solution_folder }}\${{ inputs.solution_name }} `
           ${{ GITHUB.WORKSPACE }}\${{ env.solution_target_folder }}\${{ inputs.solution_name }}
