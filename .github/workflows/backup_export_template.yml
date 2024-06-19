@@ -1,0 +1,154 @@
+name: Commit workflow template
+
+on:
+  workflow_call:
+   inputs:
+    #Change this value
+    solution_name:
+     description: 'name of the solution to worked on from Power Platform'
+     type: string
+     required: true
+     default:  <SolutionName>
+
+    power_env:
+     description: 'development environment url of each power platform user, used to export the solution from Power Platform environment'
+     type: string
+     required: true
+     default:  <SolutionName>
+
+    power_user:
+     description: 'login name of each power platform user, used to export the solution from Power Platform environment'
+     type: string
+     required: true
+     default:  <SolutionName>
+
+    gh_email:
+     description: 'Github email of each user, used to commit and create pull request'
+     type: string
+     required: true
+
+   secrets:
+    gh_token:
+     description: 'Github PAT of each user, used to commit and create pull request'
+     required: true
+
+    power_pwd:
+     description: 'login password of each Power Platform user, used to export the solution from Power Platform environment'
+     required: true
+
+
+env:
+ #folder name for staging the exported solution *do not change*
+ solution_exported_folder: out\exported
+
+ #staging the unpacked solution folder before check-in *do not change*
+ solution_folder: out\solutions
+
+ #folder name to be created and checked in *do not change*
+ solution_target_folder: solutions
+
+ #folder location for the sync batch file *do not change*
+ sync_batch_folder: .github/workflows
+
+jobs:
+  export-from-power-apps:
+    runs-on: windows-latest
+    steps:
+      - name: Install Power Platform Tools
+        uses: microsoft/powerplatform-actions/actions-install@v1
+        
+      - name: Configure Git
+        run: |
+          git config --global user.name ${{ github.actor }}
+          git config --global user.email ${{ inputs.gh_email }}
+
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+        
+      - name: Export Power Apps Solution
+        id: export
+        uses: microsoft/powerplatform-actions/export-solution@v1
+        with:
+         environment-url: ${{ inputs.power_env }}
+         user-name: ${{ inputs.power_user }}
+         password-secret: ${{ secrets.power_pwd }}
+         solution-name: ${{ inputs.solution_name }}
+         solution-output-file: ${{ env.solution_exported_folder }}/${{ inputs.solution_name }}.zip
+         
+      - name: Unpack Power Apps Solution
+        id: unpack
+        if: steps.export.outcome == 'success'
+        uses: microsoft/powerplatform-actions/unpack-solution@v1
+        with:
+         solution-file: ${{ env.solution_exported_folder }}/${{ inputs.solution_name }}.zip
+         solution-folder: ${{ env.solution_folder }}/${{ inputs.solution_name }}
+         solution-type: 'unmanaged'
+         overwrite-files: true
+
+      - name: Remove Zip Files
+        id: remove
+        if: steps.export.outcome == 'success'
+        run: rm ${{ env.solution_exported_folder }}/${{ inputs.solution_name }}.zip -r -force
+
+      - name: Commit changes
+        id: commit1
+        if: steps.remove.outcome == 'success'
+        run: |
+          git add *
+          git commit -m "Synchronized with ${{ inputs.power_user }} from ${{ inputs.solution_name }} in Power Apps"
+          git push
+          
+  sync-solution-repo:
+    needs: export-from-power-apps
+    runs-on: windows-latest
+    steps:
+      - name: Configure Git
+        run: |
+          git config --global user.name ${{ github.actor }}
+          git config --global user.email ${{ inputs.gh_email }}
+
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+          
+      - name: Synchronize Files
+        id: sync
+        if: steps.checkout.outcome == 'success'
+        run: |
+          cd ${{ env.sync_batch_folder }}
+          cmd /k sync_repo_with_export.bat ${{ GITHUB.WORKSPACE }}\${{ env.solution_folder }}\${{ inputs.solution_name }} ${{ GITHUB.WORKSPACE }}\${{ env.solution_target_folder }}\${{ inputs.solution_name }}
+
+      - name: Remove Export Files
+        id: remove
+        if: steps.sync.outcome == 'success'
+        run: rm ${{ GITHUB.WORKSPACE }}\${{ env.solution_folder }}\${{ inputs.solution_name }} -r -force
+        
+      - name: Commit changes
+        id: commit
+        if: steps.remove.outcome == 'success'
+        run: |
+          git add *
+          git commit -m "Synchronized with ${{ inputs.power_user }} from ${{ inputs.solution_name }} in Power Apps"
+          git push
+          
+  create-pull-request:
+    needs: [sync-solution-repo, export-from-power-apps]
+    runs-on: windows-latest
+    steps:
+      - name: Configure Git
+        run: |
+          git config --global user.name ${{ github.actor }}
+          git config --global user.email ${{ inputs.gh_email }}
+
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+        
+      - name: Create pull request
+        id: pullrequest
+        if: steps.checkout.outcome == 'success'
+        run: |
+         gh pr create `
+         --title "${{ github.ref }} -> main" --body "Automated pull request creation from ${{ github.ref }} branch." `
+         --reviewer ${{ github.actor }} --base "main" --head "${{ github.ref }}" --repo "${{ github.repository }}"
