@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Connector xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <connectorid>bac984b8-5bb7-494e-b670-e35fa822110f</connectorid>
+  <description></description>
+  <displayname>testconn</displayname>
+  <iconbrandcolor>#007ee5</iconbrandcolor>
+  <name>cr668_5Ftestconn</name>
+  <connectortype>1</connectortype>
+  <openapidefinition>/Connector/cr668_5Ftestconn_openapidefinition.json</openapidefinition>
+  <connectionparameters>/Connector/cr668_5Ftestconn_connectionparameters.json</connectionparameters>
+  <policytemplateinstances>/Connector/cr668_5Ftestconn_policytemplateinstances.json</policytemplateinstances>
+  <iconblob>/Connector/cr668_5Ftestconn_iconblob.Png</iconblob>
+</Connector>
