@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "1e9c5376-34bb-a368-d44d-bb8ac4ddec9a",
+    "Name": "PostgresDeleteUser",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "321fce07-720c-ef11-9f89-6045bd17acdc"
+  }
+]

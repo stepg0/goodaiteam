@@ -1,0 +1,10 @@
+[
+  {
+    "ApiId": "/providers/microsoft.powerapps/apis/shared_logicflows",
+    "FlowNameId": "bb55e328-e19e-4076-8799-690553721424",
+    "Name": "PostgresInsertUser",
+    "ServiceKind": "ConnectedWadl",
+    "Type": "ServiceInfo",
+    "WorkflowEntityId": "732d65ad-6e0c-ef11-9f89-6045bd17acdc"
+  }
+]

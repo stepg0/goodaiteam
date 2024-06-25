@@ -1,0 +1,131 @@
+{
+  "8119c8ce-1340-45c4-b114-1dcd7c405431": {
+    "appActions": [
+      "Run"
+    ],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Logic flows",
+      "iconUri": "https://connectoricons-prod.azureedge.net/u/patelronak/specialtrain-logicflows-2/1.0.1692.3734/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "fd867609-84e7-498a-bdf7-a2a50e063980": {
+          "value": "shared_postgresql"
+        },
+        "workflowDisplayName": {
+          "value": "PostgresInsertUser"
+        },
+        "workflowEntityId": {
+          "value": "732d65ad-6e0c-ef11-9f89-6045bd17acdc"
+        },
+        "workflowName": {
+          "value": "686b912a-a902-8d95-c15d-73474217b4a7"
+        }
+      },
+      "parameterHintsV2": {
+        "shared_postgresql": {
+          "value": "fd867609-84e7-498a-bdf7-a2a50e063980"
+        },
+        "workflowDisplayName": {
+          "value": "PostgresInsertUser"
+        },
+        "workflowEntityId": {
+          "value": "732d65ad-6e0c-ef11-9f89-6045bd17acdc"
+        },
+        "workflowName": {
+          "value": "686b912a-a902-8d95-c15d-73474217b4a7"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "PostgresInsertUser"
+    ],
+    "dependencies": {
+      "shared_postgresql": "fd867609-84e7-498a-bdf7-a2a50e063980"
+    },
+    "dependents": [],
+    "id": "8119c8ce-1340-45c4-b114-1dcd7c405431"
+  },
+  "f4e601e9-7e38-4de8-8924-b83084622748": {
+    "appActions": [
+      "Run"
+    ],
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Logic flows",
+      "iconUri": "https://connectoricons-prod.azureedge.net/u/patelronak/specialtrain-logicflows-2/1.0.1692.3734/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "fd867609-84e7-498a-bdf7-a2a50e063980": {
+          "value": "shared_postgresql"
+        },
+        "workflowDisplayName": {
+          "value": "PostgresDeleteUser"
+        },
+        "workflowEntityId": {
+          "value": "321fce07-720c-ef11-9f89-6045bd17acdc"
+        },
+        "workflowName": {
+          "value": "1e9c5376-34bb-a368-d44d-bb8ac4ddec9a"
+        }
+      },
+      "parameterHintsV2": {
+        "shared_postgresql": {
+          "value": "fd867609-84e7-498a-bdf7-a2a50e063980"
+        },
+        "workflowDisplayName": {
+          "value": "PostgresDeleteUser"
+        },
+        "workflowEntityId": {
+          "value": "321fce07-720c-ef11-9f89-6045bd17acdc"
+        },
+        "workflowName": {
+          "value": "1e9c5376-34bb-a368-d44d-bb8ac4ddec9a"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "PostgresDeleteUser"
+    ],
+    "dependencies": {
+      "shared_postgresql": "fd867609-84e7-498a-bdf7-a2a50e063980"
+    },
+    "dependents": [],
+    "id": "f4e601e9-7e38-4de8-8924-b83084622748"
+  },
+  "fd867609-84e7-498a-bdf7-a2a50e063980": {
+    "appActions": [
+      "providers/PowerPlatform.Governance/Operations/Read",
+      "providers/PowerPlatform.Governance/Operations/Write"
+    ],
+    "connectionRef": {
+      "apiTier": "Premium",
+      "displayName": "PostgreSQL",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1677/1.0.1677.3637/postgresql/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_postgresql",
+      "parameterHints": {},
+      "parameterHintsV2": {},
+      "sharedConnectionId": "/providers/microsoft.powerapps/apis/shared_postgresql/connections/a97e94239111448aa26fcd58af273605"
+    },
+    "datasets": {
+      "default": {
+        "dataSources": {
+          "public.skillbooster_ex_tab": {
+            "tableName": "[public].[skillbooster_ex_tab]"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "public.skillbooster_ex_tab"
+    ],
+    "dependencies": {},
+    "dependents": [
+      "f4e601e9-7e38-4de8-8924-b83084622748",
+      "8119c8ce-1340-45c4-b114-1dcd7c405431"
+    ],
+    "id": "fd867609-84e7-498a-bdf7-a2a50e063980"
+  }
+}

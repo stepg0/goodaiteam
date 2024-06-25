@@ -1,0 +1,187 @@
+NewUser As screen:
+
+    Container3 As groupContainer.horizontalAutoLayoutContainer:
+        Height: =692
+        LayoutMode: =LayoutMode.Auto
+        Width: =1282
+        X: =40
+        Y: =40
+        ZIndex: =1
+
+        Container4 As groupContainer.verticalAutoLayoutContainer:
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            Form3 As form:
+                DataSource: ='public.skillbooster_ex_tab'
+                DefaultMode: =FormMode.New
+                FillPortions: =0.2
+                LayoutMinHeight: =100
+                LayoutMinWidth: =400
+                ZIndex: =1
+
+                username_DataCard3 As typedDataCard.textualEditCard:
+                    BorderStyle: =BorderStyle.Solid
+                    DataField: ="username"
+                    Default: =ThisItem.username
+                    DisplayMode: =Parent.DisplayMode
+                    DisplayName: =DataSourceInfo([@'public.skillbooster_ex_tab'],DataSourceInfo.DisplayName,username)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =119
+                    MaxLength: =DataSourceInfo([@'public.skillbooster_ex_tab'], DataSourceInfo.MaxLength, username)
+                    Required: =true
+                    Update: =DataCardValue3.Text
+                    Width: =639
+                    X: =0
+                    Y: =0
+                    ZIndex: =1
+
+                    DataCardKey3 As label:
+                        AutoHeight: =true
+                        Height: =34
+                        Text: |-
+                            ="Username
+                            "
+                        Width: =585
+                        Wrap: =false
+                        X: =20
+                        Y: =10
+                        ZIndex: =1
+
+                    DataCardValue3 As text:
+                        BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                        Default: =Parent.Default
+                        DelayOutput: =true
+                        DisplayMode: =Parent.DisplayMode
+                        MaxLength: =Parent.MaxLength
+                        PaddingLeft: =5
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Tooltip: =Parent.DisplayName
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardKey3.Y + DataCardKey3.Height + 5
+                        ZIndex: =2
+
+                    ErrorMessage3 As label:
+                        AutoHeight: =true
+                        Height: =10
+                        Live: =Live.Assertive
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =Parent.Error
+                        Visible: =Parent.DisplayMode=DisplayMode.Edit
+                        Width: =Parent.Width - 60
+                        X: =30
+                        Y: =DataCardValue3.Y + DataCardValue3.Height
+                        ZIndex: =3
+
+                    StarVisible3 As label:
+                        Align: =Align.Center
+                        Height: =DataCardKey3.Height
+                        Text: ="*"
+                        Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                        Width: =30
+                        Wrap: =false
+                        Y: =DataCardKey3.Y
+                        ZIndex: =4
+
+            Button2 As button:
+                AlignInContainer: =AlignInContainer.Center
+                OnSelect: |-
+                    =UpdateContext( { name: DataCardValue3.Text } );
+                    Notify(name);
+                    UpdateContext( { uid: PostgresInsertUser.Run(name).userid } );
+                    Refresh('public.skillbooster_ex_tab')
+                Text: ="Submit"
+                ZIndex: =2
+
+        Container6 As groupContainer.verticalAutoLayoutContainer:
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =2
+
+            "Gallery2 As gallery.'BrowseLayout_Flexible_NewsFeed_ver5.0'":
+                AlignInContainer: =AlignInContainer.SetByContainer
+                DelayItemLoading: =true
+                Height: =100
+                Items: =Sort('public.skillbooster_ex_tab',created_at, SortOrder.Descending)
+                Layout: =Layout.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =320
+                LoadingSpinner: =LoadingSpinner.Data
+                TabIndex: =1
+                TemplatePadding: =0
+                TemplateSize: =Min(220, Self.Height - 60)
+                ZIndex: =1
+
+                Title6 As label:
+                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                    Height: =56
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =ThisItem.email
+                    Width: =353
+                    X: =14
+                    ZIndex: =1
+
+                Body3 As label:
+                    Align: =Align.Right
+                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold, FontWeight.Normal)
+                    Height: =56
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: =ThisItem.created_at
+                    Width: =154
+                    X: =445
+                    Y: =1
+                    ZIndex: =2
+
+                Separator5 As rectangle:
+                    Height: =1
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    Y: =56
+                    ZIndex: =4
+
+                Label2 As label:
+                    Height: =56
+                    OnSelect: =Select(Parent)
+                    Text: =ThisItem.user_id
+                    Width: =78
+                    X: =367
+                    ZIndex: =5
+
+                Icon2 As icon.Trash:
+                    Height: =44
+                    Icon: =Icon.Trash
+                    OnSelect: |-
+                        =PostgresDeleteUser.Run(ThisItem.user_id);
+                        Refresh('public.skillbooster_ex_tab');
+                    Width: =37
+                    X: =603
+                    Y: =7
+                    ZIndex: =6
+
+            Button3 As button:
+                AlignInContainer: =AlignInContainer.Center
+                OnSelect: =Refresh('public.skillbooster_ex_tab')
+                Text: ="Refresh"
+                VerticalAlign: =VerticalAlign.Bottom
+                ZIndex: =2
+
