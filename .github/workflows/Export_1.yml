@@ -45,6 +45,7 @@ jobs:
          solution-folder: ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}
          solution-type: 'unmanaged'
          overwrite-files: true
+         process-canvas-apps: true
          
       - id: commit
         if: steps.unpack.outcome == 'success'
