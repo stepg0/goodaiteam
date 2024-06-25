@@ -23,5 +23,5 @@ jobs:
       - name: Run a multi-line script
         working-directory: ${{ env.WORKFLOW_FOLDER }}
         run: |
-          cmd /k sync_repo_with_export.bat ${{ GITHUB.WORKSPACE }}/a ${{ GITHUB.WORKSPACE }}/b
+          pac
 
