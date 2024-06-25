@@ -18,7 +18,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: microsoft/powerplatform-actions@v1
+      - uses: microsoft/powerplatform-actions/actions-install@v1
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         working-directory: ${{ env.WORKFLOW_FOLDER }}
