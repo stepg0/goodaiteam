@@ -1,0 +1,24 @@
+Screen1 As screen:
+
+    MainContainer As groupContainer.horizontalAutoLayoutContainer:
+        Height: =768
+        LayoutMode: =LayoutMode.Auto
+        Width: =1366
+        ZIndex: =1
+
+        InsertContainer As groupContainer.verticalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            ZIndex: =1
+
+            Label As label:
+                Text: ="Label"
+                ZIndex: =1
+
+            Button2 As button:
+                Text: ="Button"
+                ZIndex: =2
+
