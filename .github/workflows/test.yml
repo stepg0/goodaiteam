@@ -23,5 +23,6 @@ jobs:
       - name: Run a multi-line script
         working-directory: ${{ env.WORKFLOW_FOLDER }}
         run: |
-          pac
+          dotnet tool install --global Microsoft.PowerApps.CLI.Tool
+          pac canvas pack --sources MyHelloWorldFiles --msapp HelloWorld.msapp
 
