@@ -47,8 +47,13 @@ jobs:
          overwrite-files: true
          process-canvas-apps: true
          
+      - name: Remove Zip Files
+        id: remove1
+        if: steps.export.outcome == 'success'
+        run: rm ${{ env.EXPORT_FOLDER }}/${{ env.SOLUTION_NAME }}.zip -r -force
+        
       - id: commit
-        if: steps.unpack.outcome == 'success'
+        if: steps.remove1.outcome == 'success'
         name: Commit changes
         run: |
           git add *
