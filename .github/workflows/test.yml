@@ -34,7 +34,7 @@ jobs:
 
 
       - id: commit
-        if: steps.remove1.outcome == 'success'
+        if: steps.canvas.outcome == 'success'
         name: Commit changes
         run: |
           git add *
