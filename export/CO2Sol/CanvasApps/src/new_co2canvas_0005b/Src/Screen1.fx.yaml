@@ -19,6 +19,6 @@ Screen1 As screen:
                 ZIndex: =1
 
             Button2 As button:
-                Text: ="Button"
+                Text: ="AAA"
                 ZIndex: =2
 
