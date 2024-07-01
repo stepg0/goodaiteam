@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   
 env:
-  SOLUTION_NAME: Technical
+  SOLUTION_NAME: CO2Sol
   EXPORT_FOLDER: export
   WORKFLOW_FOLDER: .github/workflows
   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
