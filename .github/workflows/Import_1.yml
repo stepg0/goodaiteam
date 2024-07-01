@@ -28,7 +28,7 @@ jobs:
         name: Pack the canvas app to msapp
         run: |
           dotnet tool install --global Microsoft.PowerApps.CLI.Tool
-          pac canvas pack --sources export\${{ env.SOLUTION_NAME }}\CanvasApps\src\new_co2canvas_0005b --msapp new_co2canvas_0005b_DocumentUri.msapp
+          pac canvas pack --sources export\${{ env.SOLUTION_NAME }}\CanvasApps\src\new_co2canvas_0005b --msapp export\${{ env.SOLUTION_NAME }}\CanvasApps\new_co2canvas_0005b_DocumentUri.msapp
           
       - id: pack
         if: steps.canvas.outcome == 'success'
