@@ -7,7 +7,7 @@ env:
   POWER_APPS: 'https://skillboosterccapart13senvironmen.crm16.dynamics.com'
   POWER_USER: 'SkillboosterCCAPart13@mscloudguild.onmicrosoft.com' #EACH USER
   POWER_PWD: 'Fuy71602' #EACH USER
-  SOLUTION_NAME: Technical
+  SOLUTION_NAME: CO2Sol
   EXPORT_FOLDER: export
   WORKFLOW_FOLDER: .github/workflows
   GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -20,9 +20,24 @@ jobs:
       - uses: actions/checkout@v4
       - uses: microsoft/powerplatform-actions/actions-install@v1
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        working-directory: ${{ env.WORKFLOW_FOLDER }}
+
+      - id: checkout
+        name: Checkout
+        uses: actions/checkout@v4
+
+      - id: canvas
+        if: steps.checkout.outcome == 'success'
+        name: Pack the canvas app to msapp
         run: |
           dotnet tool install --global Microsoft.PowerApps.CLI.Tool
-          pac canvas pack --sources MyHelloWorldFiles --msapp HelloWorld.msapp
+          pac canvas pack --sources export\${{ env.SOLUTION_NAME }}\CanvasApps\src\new_co2canvas_0005b --msapp new_co2canvas_0005b_DocumentUri.msapp
 
+
+      - id: commit
+        if: steps.remove1.outcome == 'success'
+        name: Commit changes
+        run: |
+          git add *
+          git commit -m "Exported solution ${{ env.SOLUTION_NAME }} in Power Apps by ${{ env.POWER_USER }}"
+          git push
+          
